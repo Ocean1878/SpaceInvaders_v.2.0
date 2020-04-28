@@ -16,6 +16,10 @@
 		8478C7FD2458A816008AAB80 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8478C7FB2458A816008AAB80 /* Main.storyboard */; };
 		8478C8092458A817008AAB80 /* SpaceInvaders_v_2_0Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478C8082458A817008AAB80 /* SpaceInvaders_v_2_0Tests.swift */; };
 		8478C8142458A817008AAB80 /* SpaceInvaders_v_2_0UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478C8132458A817008AAB80 /* SpaceInvaders_v_2_0UITests.swift */; };
+		8478C8252458A844008AAB80 /* alien_feuer.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8478C8212458A843008AAB80 /* alien_feuer.m4a */; };
+		8478C8262458A844008AAB80 /* raumschiff_explosion.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8478C8222458A843008AAB80 /* raumschiff_explosion.m4a */; };
+		8478C8272458A844008AAB80 /* alien_explosion.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8478C8232458A843008AAB80 /* alien_explosion.m4a */; };
+		8478C8282458A844008AAB80 /* raumschiff_feuer.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8478C8242458A844008AAB80 /* raumschiff_feuer.m4a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +56,10 @@
 		8478C80F2458A817008AAB80 /* SpaceInvaders_v.2.0UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceInvaders_v.2.0UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8478C8132458A817008AAB80 /* SpaceInvaders_v_2_0UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceInvaders_v_2_0UITests.swift; sourceTree = "<group>"; };
 		8478C8152458A817008AAB80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8478C8212458A843008AAB80 /* alien_feuer.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = alien_feuer.m4a; path = ../../../Beispieldateien/alien_feuer.m4a; sourceTree = "<group>"; };
+		8478C8222458A843008AAB80 /* raumschiff_explosion.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = raumschiff_explosion.m4a; path = ../../../Beispieldateien/raumschiff_explosion.m4a; sourceTree = "<group>"; };
+		8478C8232458A843008AAB80 /* alien_explosion.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = alien_explosion.m4a; path = ../../../Beispieldateien/alien_explosion.m4a; sourceTree = "<group>"; };
+		8478C8242458A844008AAB80 /* raumschiff_feuer.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = raumschiff_feuer.m4a; path = ../../../Beispieldateien/raumschiff_feuer.m4a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +116,10 @@
 				8478C7F52458A816008AAB80 /* GameScene.swift */,
 				8478C7F72458A816008AAB80 /* ViewController.swift */,
 				8478C7F92458A816008AAB80 /* Assets.xcassets */,
+				8478C8232458A843008AAB80 /* alien_explosion.m4a */,
+				8478C8212458A843008AAB80 /* alien_feuer.m4a */,
+				8478C8222458A843008AAB80 /* raumschiff_explosion.m4a */,
+				8478C8242458A844008AAB80 /* raumschiff_feuer.m4a */,
 				8478C7FB2458A816008AAB80 /* Main.storyboard */,
 				8478C7FE2458A816008AAB80 /* Info.plist */,
 				8478C7FF2458A816008AAB80 /* SpaceInvaders_v_2_0.entitlements */,
@@ -238,9 +250,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				8478C7F22458A816008AAB80 /* GameScene.sks in Resources */,
+				8478C8252458A844008AAB80 /* alien_feuer.m4a in Resources */,
+				8478C8282458A844008AAB80 /* raumschiff_feuer.m4a in Resources */,
 				8478C7FA2458A816008AAB80 /* Assets.xcassets in Resources */,
 				8478C7F42458A816008AAB80 /* Actions.sks in Resources */,
+				8478C8262458A844008AAB80 /* raumschiff_explosion.m4a in Resources */,
 				8478C7FD2458A816008AAB80 /* Main.storyboard in Resources */,
+				8478C8272458A844008AAB80 /* alien_explosion.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
