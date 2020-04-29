@@ -117,7 +117,7 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
         zwischenZeit = zwischenZeit + delta
         
         // haben wir eine Sekunde erreicht?
-        if zwischenZeit >= 1.0 {
+        if zwischenZeit >= 0.003 {
             // durchlaufen alle Knoten, die den Namen "alien" haben
             enumerateChildNodes(withName: "alien") {
                 // die Verarbeitung abbrechen können
@@ -167,4 +167,57 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
     }
     
     
+    func didBegin(_ contact: SKPhysicsContact) {
+        // ist ein Alien mit einem Geschoss des Raumschiffs kollidiert?
+        if contact.bodyA.categoryBitMask == 0b10 && contact.bodyB.categoryBitMask == 0b11 {
+            // dann zerstören wir die beiden Objekte
+            contact.bodyA.node?.removeFromParent()
+            contact.bodyB.node?.removeFromParent()
+            
+            // wir erhöhen die Punkte und geben sie aus
+            punkte = punkte + 10
+            labelPunkte.text = String(punkte)
+            
+            // zum Testen geben wir noch eine Meldung aus
+            print("Alien getroffen")
+        }
+        
+        // ist ein Geschoss eines Aliens mit dem Raumschiff kollidiert?
+        if contact.bodyA.categoryBitMask == 0b1 && contact.bodyB.categoryBitMask == 0b100 {
+            // dann zerstören wir das Geschoss
+            contact.bodyB.node?.removeFromParent()
+            
+            // wir ziehen Energie des Raumschiffes ab
+            energie = energie - 10
+            labelEnergie.text = String(energie)
+            
+            // zum Testen geben wir noch eine Meldung aus
+            print("Raumschoff getroffen")
+        }
+        
+        // ist ein Alien mit dem Raumschiff kollidiert?
+        if contact.bodyA.categoryBitMask == 0b1 && contact.bodyB.categoryBitMask == 0b10 {
+            // dann zerstören wir die beiden Objekte
+            contact.bodyA.node?.removeFromParent()
+            contact.bodyB.node?.removeFromParent()
+            
+            // Der Energie des Raumschiffes wird auf 0 gesetzt
+            energie = 0
+            labelEnergie.text = String(energie)
+            
+            // zum Testen geben wir noch eine Meldung aus
+            print("Raumschiff ist mit ein Alien Kollidiert")
+        }
+        // prüfen, ob das Spiel beendet werden muss
+        istSpielZuEnde()
+    }
+    
+    // Hier überprüfen wir, ob das Spiel beendet werden muss
+    func istSpielZuEnde() {
+        // ist die Energie gleich 0 oder kein Alien mehr im Spiel?
+        if energie == 0 || childNode(withName: "alien") == nil {
+            // dann rufen wir die Endszene auf und übergeben die Punkte
+            self.view?.presentScene(GameLevelEnd(size: self.size, punkte: self.punkte), transition: SKTransition.flipHorizontal(withDuration: 1.0))
+        }
+    }
 }

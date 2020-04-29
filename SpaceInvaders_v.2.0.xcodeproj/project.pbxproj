@@ -23,6 +23,7 @@
 		8478C82A2458B5B3008AAB80 /* GameLevel1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478C8292458B5B3008AAB80 /* GameLevel1.swift */; };
 		8478C82E2458C74E008AAB80 /* Raumschiff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478C82D2458C74E008AAB80 /* Raumschiff.swift */; };
 		8478C8302458D44E008AAB80 /* Alien.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478C82F2458D44E008AAB80 /* Alien.swift */; };
+		8478C832245A1540008AAB80 /* GameLevelEnd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478C831245A1540008AAB80 /* GameLevelEnd.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		8478C8292458B5B3008AAB80 /* GameLevel1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLevel1.swift; sourceTree = "<group>"; };
 		8478C82D2458C74E008AAB80 /* Raumschiff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Raumschiff.swift; sourceTree = "<group>"; };
 		8478C82F2458D44E008AAB80 /* Alien.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alien.swift; sourceTree = "<group>"; };
+		8478C831245A1540008AAB80 /* GameLevelEnd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLevelEnd.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 				8478C7F12458A816008AAB80 /* GameScene.sks */,
 				8478C7F32458A816008AAB80 /* Actions.sks */,
 				8478C8292458B5B3008AAB80 /* GameLevel1.swift */,
+				8478C831245A1540008AAB80 /* GameLevelEnd.swift */,
 				8478C7F52458A816008AAB80 /* GameScene.swift */,
 				8478C82D2458C74E008AAB80 /* Raumschiff.swift */,
 				8478C82F2458D44E008AAB80 /* Alien.swift */,
@@ -292,6 +295,7 @@
 			files = (
 				8478C7F82458A816008AAB80 /* ViewController.swift in Sources */,
 				8478C82E2458C74E008AAB80 /* Raumschiff.swift in Sources */,
+				8478C832245A1540008AAB80 /* GameLevelEnd.swift in Sources */,
 				8478C7F62458A816008AAB80 /* GameScene.swift in Sources */,
 				8478C8302458D44E008AAB80 /* Alien.swift in Sources */,
 				8478C82A2458B5B3008AAB80 /* GameLevel1.swift in Sources */,
