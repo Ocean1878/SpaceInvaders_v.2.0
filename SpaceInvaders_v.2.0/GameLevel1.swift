@@ -79,6 +79,7 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         // die Szene reagiert selbst auf eine Kollision und
         // wird bei einer Kollision aufgerufen
+        physicsWorld.contactDelegate = self
     }
     
     

@@ -30,12 +30,29 @@ class Alien: SKSpriteNode {
         
         // einen Namen setzen
         name = "alien"
+        
+        
+        // die Formen für die Kollisionsprüfung
+        // hier ein Rechteck in der Größe des Sprites
+        self.physicsBody = SKPhysicsBody(rectangleOf: self.size)
+        
+        // das Alien bekommt die Kategorie 2 = 0b10
+        // sie muss als Bitmaske als binärer Wert angegeben werden
+        self.physicsBody?.categoryBitMask = 0b10
+        
+        // reagiert auf Kontakt mit einem Raumschiffgeschoss
+        // und Raumschiff
+        self.physicsBody?.contactTestBitMask = 0b1 | 0b11
+        
+        // es soll aber nicht auf Kollisionen reagieren
+        self.physicsBody?.collisionBitMask = 0
     }
     
     // der Initialisierer wird durch die Basisklasse erzwungen
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    
     
     // die Methode setzt das Alien in die übergebene Szene
     // und zeigt es an
@@ -47,6 +64,7 @@ class Alien: SKSpriteNode {
         self.szene.addChild(self)
         position = startPos
     }
+    
     
     // die Methode erhält die Richtung, in der die Bewegung erfolgt,
     // als Argumente
@@ -73,6 +91,7 @@ class Alien: SKSpriteNode {
         return kontakt
     }
     
+    
     // die Methode zum Feuern für die Aliens
     func feuern() {
         // eine zufällige Zahl erzeugen, die obere Grenze wird durch
@@ -80,6 +99,18 @@ class Alien: SKSpriteNode {
         if arc4random_uniform(UInt32(feuerGeschwindigkeit)) == 0 {
             // das Sprite erzeugen
             let munitionSprite = SKSpriteNode(imageNamed: "munition_invader")
+            
+            
+            // die Formen für die Kollisionsprüfung
+            // hier ein Rechteck in der Größe des Sprites
+            munitionSprite.physicsBody = SKPhysicsBody(rectangleOf: munitionSprite.size)
+            
+            // das Aliengeschoss bekommt die Kategorie 4 = 0b100
+            // sie muss als Bitmaske als binärer Wert angegeben werden
+            munitionSprite.physicsBody?.categoryBitMask = 0b100
+            // es ragiert nicht auf Kollisionen
+            munitionSprite.physicsBody?.collisionBitMask = 0
+            
             
             // die Munition in der Mitte des Aliens positionieren
             munitionSprite.position = CGPoint(x: frame.midX, y: frame.maxY)
