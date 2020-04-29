@@ -24,6 +24,8 @@
 		8478C82E2458C74E008AAB80 /* Raumschiff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478C82D2458C74E008AAB80 /* Raumschiff.swift */; };
 		8478C8302458D44E008AAB80 /* Alien.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478C82F2458D44E008AAB80 /* Alien.swift */; };
 		8478C832245A1540008AAB80 /* GameLevelEnd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478C831245A1540008AAB80 /* GameLevelEnd.swift */; };
+		8478C834245A29B1008AAB80 /* alien_explosion.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8478C833245A29B1008AAB80 /* alien_explosion.mp3 */; };
+		8478C836245A29D3008AAB80 /* raumschiff_feuer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8478C835245A29D3008AAB80 /* raumschiff_feuer.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +70,8 @@
 		8478C82D2458C74E008AAB80 /* Raumschiff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Raumschiff.swift; sourceTree = "<group>"; };
 		8478C82F2458D44E008AAB80 /* Alien.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alien.swift; sourceTree = "<group>"; };
 		8478C831245A1540008AAB80 /* GameLevelEnd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLevelEnd.swift; sourceTree = "<group>"; };
+		8478C833245A29B1008AAB80 /* alien_explosion.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = alien_explosion.mp3; path = ../../../Beispieldateien/alien_explosion.mp3; sourceTree = "<group>"; };
+		8478C835245A29D3008AAB80 /* raumschiff_feuer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = raumschiff_feuer.mp3; path = ../../../Beispieldateien/raumschiff_feuer.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +132,8 @@
 				8478C82F2458D44E008AAB80 /* Alien.swift */,
 				8478C7F72458A816008AAB80 /* ViewController.swift */,
 				8478C7F92458A816008AAB80 /* Assets.xcassets */,
+				8478C833245A29B1008AAB80 /* alien_explosion.mp3 */,
+				8478C835245A29D3008AAB80 /* raumschiff_feuer.mp3 */,
 				8478C8232458A843008AAB80 /* alien_explosion.m4a */,
 				8478C8212458A843008AAB80 /* alien_feuer.m4a */,
 				8478C8222458A843008AAB80 /* raumschiff_explosion.m4a */,
@@ -265,9 +271,11 @@
 				8478C8252458A844008AAB80 /* alien_feuer.m4a in Resources */,
 				8478C8282458A844008AAB80 /* raumschiff_feuer.m4a in Resources */,
 				8478C7FA2458A816008AAB80 /* Assets.xcassets in Resources */,
+				8478C834245A29B1008AAB80 /* alien_explosion.mp3 in Resources */,
 				8478C7F42458A816008AAB80 /* Actions.sks in Resources */,
 				8478C8262458A844008AAB80 /* raumschiff_explosion.m4a in Resources */,
 				8478C7FD2458A816008AAB80 /* Main.storyboard in Resources */,
+				8478C836245A29D3008AAB80 /* raumschiff_feuer.mp3 in Resources */,
 				8478C8272458A844008AAB80 /* alien_explosion.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

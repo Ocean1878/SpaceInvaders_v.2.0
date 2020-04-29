@@ -42,7 +42,8 @@ class Alien: SKSpriteNode {
         
         // reagiert auf Kontakt mit einem Raumschiffgeschoss
         // und Raumschiff
-        self.physicsBody?.contactTestBitMask = 0b1 | 0b11
+        // das Geschoss gehört zur Kategorie 8 = 0b1000
+        self.physicsBody?.contactTestBitMask = 0b1 | 0b1000
         
         // es soll aber nicht auf Kollisionen reagieren
         self.physicsBody?.collisionBitMask = 0
@@ -117,8 +118,13 @@ class Alien: SKSpriteNode {
             // und hinzufügen
             szene.addChild(munitionSprite)
             
-            // und die Munition nach unten bewegen
-            munitionSprite.run(SKAction.repeatForever(SKAction.move(by: CGVector(dx: 0, dy: -200), duration: 1.0)))
+            // die Munition nach oben bewegen und dann zerstören
+            let actionSequenz = SKAction.sequence([SKAction.repeat(SKAction.move(by: CGVector(dx: 0, dy: -200), duration: 1.5), count: 4), SKAction.removeFromParent()])
+            // die Sequenz starten
+            munitionSprite.run(actionSequenz)
+            
+            // einen Sound für das abfeuern der Aliens
+            run(SKAction.playSoundFileNamed("alien_feuer.m4a", waitForCompletion: false))
         }
     }
 }

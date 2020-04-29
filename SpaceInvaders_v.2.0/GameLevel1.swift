@@ -97,7 +97,10 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
             meinRaumschiff.bewegen(richtung: 1)
         // feuern
         case 49, 3:
-            meinRaumschiff.feuern()
+            // gibt es schon ein Geschoss in der Szene?
+            if childNode(withName: "raumschiffGeschoss") == nil {
+                meinRaumschiff.feuern()
+            }
         default:
             print(event.keyCode)
         }
@@ -117,7 +120,7 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
         zwischenZeit = zwischenZeit + delta
         
         // haben wir eine Sekunde erreicht?
-        if zwischenZeit >= 0.003 {
+        if zwischenZeit >= 1.0 {
             // durchlaufen alle Knoten, die den Namen "alien" haben
             enumerateChildNodes(withName: "alien") {
                 // die Verarbeitung abbrechen können
@@ -169,7 +172,7 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
     
     func didBegin(_ contact: SKPhysicsContact) {
         // ist ein Alien mit einem Geschoss des Raumschiffs kollidiert?
-        if contact.bodyA.categoryBitMask == 0b10 && contact.bodyB.categoryBitMask == 0b11 {
+        if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == 0b1010 {
             // dann zerstören wir die beiden Objekte
             contact.bodyA.node?.removeFromParent()
             contact.bodyB.node?.removeFromParent()
@@ -178,12 +181,15 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
             punkte = punkte + 10
             labelPunkte.text = String(punkte)
             
+            // einen Sound für das zerstören des Alienraumschiffes
+            run(SKAction.playSoundFileNamed("alien_explosion.mp3", waitForCompletion: false))
+            
             // zum Testen geben wir noch eine Meldung aus
             print("Alien getroffen")
         }
         
         // ist ein Geschoss eines Aliens mit dem Raumschiff kollidiert?
-        if contact.bodyA.categoryBitMask == 0b1 && contact.bodyB.categoryBitMask == 0b100 {
+        if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == 0b101 {
             // dann zerstören wir das Geschoss
             contact.bodyB.node?.removeFromParent()
             
@@ -191,12 +197,15 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
             energie = energie - 10
             labelEnergie.text = String(energie)
             
+            // einen Sound für das treffen des Raumschiffes durch die Aliens
+            run(SKAction.playSoundFileNamed("alien_explosion.m4a", waitForCompletion: false))
+            
             // zum Testen geben wir noch eine Meldung aus
             print("Raumschoff getroffen")
         }
         
         // ist ein Alien mit dem Raumschiff kollidiert?
-        if contact.bodyA.categoryBitMask == 0b1 && contact.bodyB.categoryBitMask == 0b10 {
+        if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == 0b11 {
             // dann zerstören wir die beiden Objekte
             contact.bodyA.node?.removeFromParent()
             contact.bodyB.node?.removeFromParent()
@@ -204,6 +213,9 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
             // Der Energie des Raumschiffes wird auf 0 gesetzt
             energie = 0
             labelEnergie.text = String(energie)
+            
+            // einen Sound für das zerstören des Raumschiffes
+            run(SKAction.playSoundFileNamed("raumschiff_explosion.m4a", waitForCompletion: false))
             
             // zum Testen geben wir noch eine Meldung aus
             print("Raumschiff ist mit ein Alien Kollidiert")

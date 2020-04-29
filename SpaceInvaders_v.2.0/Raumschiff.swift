@@ -15,7 +15,7 @@ class Raumschiff: SKSpriteNode {
     // der Initialisierer erzeugt das Raumschiff
     init() {
         // das Bild erzeugen
-        let bild = SKTexture(imageNamed: "verteidiger")
+        let bild = SKTexture(imageNamed: "Spaceship")
         // den Konstruktor der übergeordneten Klasse aufrufen
         super.init(texture: bild, color: NSColor.black, size: bild.size())
         
@@ -83,9 +83,9 @@ class Raumschiff: SKSpriteNode {
         // das Bild für das Geschoss zuweisen
         munitionSprite.name = "raumschiffGeschoss"
         
-        // das Raumschiffgeschoss bekommt die Kategorie 3 = 0b11
+        // das Raumschiffgeschoss bekommt die Kategorie 8 = 0b1000
         // sie muss als Bitmaske als binärer Wert angegeben werden
-        munitionSprite.physicsBody?.categoryBitMask = 0b11
+        munitionSprite.physicsBody?.categoryBitMask = 0b1000
         // es ragiert nicht auf Kollisionen
         munitionSprite.physicsBody?.collisionBitMask = 0
         
@@ -95,7 +95,12 @@ class Raumschiff: SKSpriteNode {
         // und hinzufügen
         szene.addChild(munitionSprite)
         
-        // die Munition nach oben bewegen
-        munitionSprite.run(SKAction.repeatForever(SKAction.move(by: CGVector(dx: 0, dy: 200), duration: 1.0)))
+        // die Munition nach oben bewegen und dann zerstören
+        let actionSequenz = SKAction.sequence([SKAction.repeat(SKAction.move(by: CGVector(dx: 0, dy: 200), duration: 1.0), count: 4), SKAction.removeFromParent()])
+        // die Sequenz starten
+        munitionSprite.run(actionSequenz)
+        
+        // einen Sound für das abfeuern des Raumschiffs
+        run(SKAction.playSoundFileNamed("raumschiff_feuer.mp3", waitForCompletion: false))
     }
 }
