@@ -20,6 +20,9 @@
 		8478C8262458A844008AAB80 /* raumschiff_explosion.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8478C8222458A843008AAB80 /* raumschiff_explosion.m4a */; };
 		8478C8272458A844008AAB80 /* alien_explosion.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8478C8232458A843008AAB80 /* alien_explosion.m4a */; };
 		8478C8282458A844008AAB80 /* raumschiff_feuer.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8478C8242458A844008AAB80 /* raumschiff_feuer.m4a */; };
+		8478C82A2458B5B3008AAB80 /* GameLevel1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478C8292458B5B3008AAB80 /* GameLevel1.swift */; };
+		8478C82E2458C74E008AAB80 /* Raumschiff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478C82D2458C74E008AAB80 /* Raumschiff.swift */; };
+		8478C8302458D44E008AAB80 /* Alien.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478C82F2458D44E008AAB80 /* Alien.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +63,9 @@
 		8478C8222458A843008AAB80 /* raumschiff_explosion.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = raumschiff_explosion.m4a; path = ../../../Beispieldateien/raumschiff_explosion.m4a; sourceTree = "<group>"; };
 		8478C8232458A843008AAB80 /* alien_explosion.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = alien_explosion.m4a; path = ../../../Beispieldateien/alien_explosion.m4a; sourceTree = "<group>"; };
 		8478C8242458A844008AAB80 /* raumschiff_feuer.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = raumschiff_feuer.m4a; path = ../../../Beispieldateien/raumschiff_feuer.m4a; sourceTree = "<group>"; };
+		8478C8292458B5B3008AAB80 /* GameLevel1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLevel1.swift; sourceTree = "<group>"; };
+		8478C82D2458C74E008AAB80 /* Raumschiff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Raumschiff.swift; sourceTree = "<group>"; };
+		8478C82F2458D44E008AAB80 /* Alien.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alien.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,7 +119,10 @@
 				8478C7EF2458A816008AAB80 /* AppDelegate.swift */,
 				8478C7F12458A816008AAB80 /* GameScene.sks */,
 				8478C7F32458A816008AAB80 /* Actions.sks */,
+				8478C8292458B5B3008AAB80 /* GameLevel1.swift */,
 				8478C7F52458A816008AAB80 /* GameScene.swift */,
+				8478C82D2458C74E008AAB80 /* Raumschiff.swift */,
+				8478C82F2458D44E008AAB80 /* Alien.swift */,
 				8478C7F72458A816008AAB80 /* ViewController.swift */,
 				8478C7F92458A816008AAB80 /* Assets.xcassets */,
 				8478C8232458A843008AAB80 /* alien_explosion.m4a */,
@@ -282,7 +291,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				8478C7F82458A816008AAB80 /* ViewController.swift in Sources */,
+				8478C82E2458C74E008AAB80 /* Raumschiff.swift in Sources */,
 				8478C7F62458A816008AAB80 /* GameScene.swift in Sources */,
+				8478C8302458D44E008AAB80 /* Alien.swift in Sources */,
+				8478C82A2458B5B3008AAB80 /* GameLevel1.swift in Sources */,
 				8478C7F02458A816008AAB80 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
