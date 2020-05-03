@@ -12,11 +12,13 @@ import GameplayKit
 class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
+        
     }
     
     override func mouseDown(with event: NSEvent) {
         // die Szene Gamelevel1 und mit einem Effekt anzeigen
         self.view?.presentScene(GameLevel1(size: self.size), transition: SKTransition.flipHorizontal(withDuration: 1.0))
+
     }
     
     override func keyDown(with event: NSEvent) {
@@ -24,6 +26,6 @@ class GameScene: SKScene {
     }
     
     override func update(_ currentTime: TimeInterval) {
-      
+        
     }
 }

@@ -1,14 +1,14 @@
 //
-//  Alien.swift
+//  EndGegner.swift
 //  SpaceInvaders_v.2.0
 //
-//  Created by Iman Kefayati on 28.04.20.
+//  Created by Iman Kefayati on 01.05.20.
 //  Copyright © 2020 Iman Kefayati. All rights reserved.
 //
 
 import SpriteKit
 
-class Alien: SKSpriteNode {
+class EndGegner: SKSpriteNode {
     // für die Szene
     var szene: SKScene!
     
@@ -18,20 +18,27 @@ class Alien: SKSpriteNode {
     // für die Feuerintensität
     let feuerGeschwindigkeit = 100
     
+    // für die Punkte
+    var punkte = 0
+    // ein Label für die Endpunkte
+    let labePunkte = SKLabelNode()
+    
+    // für die Energie
+    var energie = 0
+    let labelEnergie = SKLabelNode()
     
     
     // der Initialisierer erzeugt das Alien mit dem Bild,
     // dessen Nummer übergeben wird
-    init(textureNummer: Int) {
+    init() {
         // das Bild erzeugen
-        let bildName = "invader_0" + String(textureNummer)
-        let bild = SKTexture(imageNamed: bildName)
+        let bild = SKTexture(imageNamed: "invader_endgegner")
         
         // den Konstruktor der übergeordneten Klasse aufrufen
         super.init(texture: bild, color: NSColor.black, size: bild.size())
         
         // einen Namen setzen
-        name = "alien"
+        name = "endgegner"
         
         
         // die Formen für die Kollisionsprüfung
@@ -131,9 +138,8 @@ class Alien: SKSpriteNode {
     }
     
     // die Position auf der Y-Achse ermitteln
-    // gehört zu Aufgabe 1
+    
     func getPosition() -> CGFloat {
         return position.y
     }
-    
 }

@@ -1,35 +1,35 @@
 //
-//  GameLevel1.swift
+//  GameLevel2.swift
 //  SpaceInvaders_v.2.0
 //
-//  Created by Iman Kefayati on 28.04.20.
+//  Created by Iman Kefayati on 02.05.20.
 //  Copyright © 2020 Iman Kefayati. All rights reserved.
 //
 
 import SpriteKit
 
-class GameLevel1: SKScene, SKPhysicsContactDelegate {
+class GameLevel2: GameLevel1 {
     
-    // für die Punkte
-    var punkte = 0
-    let labelPunkte = SKLabelNode()
+//    // für die Punkte
+//    var punkte = 0
+//    let labelPunkte = SKLabelNode()
+//    
+//    // für die Energie
+//    var energie = 100
+//    let labelEnergie = SKLabelNode()
+//    
+//    // das Raumschiff
+//    var meinRaumschiff = Raumschiff()
+//    
+//    // für die Bewegung der Aliens
+//    var rechtsLinks = -1
+//    var nachUnten = 0
+//    
+//    // für die Zeitsteuerung
+//    var letzterAufruf: TimeInterval = 0
+//    var zwischenZeit: TimeInterval = 0
     
-    // für die Energie
-    var energie = 100
-    let labelEnergie = SKLabelNode()
     
-    // das Raumschiff
-    var meinRaumschiff = Raumschiff()
-    
-    // für die Bewegung der Aliens
-    var rechtsLinks = -1
-    var nachUnten = 0
-    
-    // für die Zeitsteuerung
-    var letzterAufruf: TimeInterval = 0
-    var zwischenZeit: TimeInterval = 0
-    
-  
     
     override func didMove(to view: SKView) {
         // das Label für die Punkte positionieren
@@ -48,33 +48,12 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
         // und hinzufügen
         addChild(labelEnergie)
         
+        
+        
         // das Raumschif positionieren
         // eine Instanz der Klasse Raumschiff
         meinRaumschiff.setzePosition(szene: self)
         
-        // für das Positionieren der Aliens
-        var zeile = 1
-        var spalte = 1
-        
-        // die Aliens erzeugen
-        for _ in 0 ..< 1 {
-            // ein neues Alien erzeugen
-            // übergeben wird die Nummer für die Grafik
-            var meinAlien = Alien(textureNummer: zeile)
-            
-            // das Alien in die Szene setzen
-           meinAlien.setzePosition(szene: self, startPos: CGPoint(x: CGFloat(150 + (spalte * 50)), y: CGFloat(500 + (zeile * 50))))
-           
-            
-            // die Spalte erhöhen
-            spalte = spalte + 1
-            // wenn alle Spalten gefüllt sind, geht es mit der nächsten
-            // Zeile weiter
-            if spalte == 15 {
-                zeile = zeile + 1
-                spalte = 1
-            }
-        }
         
         // die Physikengine aktivieren, aber ohne Schwerkraft
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
@@ -82,6 +61,7 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
         // wird bei einer Kollision aufgerufen
         physicsWorld.contactDelegate = self
     }
+    
     
     
     override func keyDown(with event: NSEvent) {
@@ -121,43 +101,44 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
         zwischenZeit = zwischenZeit + delta
         
         
-       // MARK: - Aufgabe 1 - Anfang -
+        // MARK: - Aufgabe 1 - Anfang -
         
-        // Bewegungslevel des Gegners - am Anfang
+        // eine Variable zur Berechnung des Levelgegners
         var level = 1
-        var anfangsPos: CGFloat = 0.0
+        // eine Variable zur Angangsposition
+        var anfangsWert: CGFloat = 0.0
         
         // durchlaufen alle Knoten, die den Namen "alien" haben
-        enumerateChildNodes(withName: "alien") {
-            // die Verarbeitung abbrechen können
+        enumerateChildNodes(withName: "endgegner") {
             knoten, stop in
             
             // zur Sicherheit prüfen, ob eine Umwandlung möglich ist
-            if let meinAlien = knoten as? Alien {
+            if let meinEndgegner = knoten as? EndGegner {
                 
-                // die Postition der untersten Reihe ermitteln
-                if anfangsPos < meinAlien.getPosition() {
-                    anfangsPos = meinAlien.getPosition()
+                // Überprüfung, ob die aktuelle Position > ist als
+                // der Anfangswert
+                if anfangsWert < meinEndgegner.getPosition() {
+                    anfangsWert = meinEndgegner.getPosition()
                 }
             }
         }
         
-        // Level in Abhängigkeit der aktuellen Position setzen
-        level = self.setLevel(position: anfangsPos)
-        
+        // das Level zur aktuellen Position setzen
+        level = self.setLevel(position: anfangsWert)
+    
         // MARK: - Aufgabe 1 - Ende -
         
         
-        // haben wir eine Sekunde erreicht?
-        if zwischenZeit >= (0.4 / Double(level)) { // Geringe Zeit für erhöhten Schwirigkeitsgrad wichtig
+        // die verringerte Vergleichszeit isr für das Schwirigkeitsgrad wichtig
+        if zwischenZeit >= (0.4 / Double(level)) { // das ist ebenfalls für Aufgabe 1
             // durchlaufen alle Knoten, die den Namen "alien" haben
-            enumerateChildNodes(withName: "alien") {
+            enumerateChildNodes(withName: "endgegner") {
                 // die Verarbeitung abbrechen können
                 knoten, stop in
                 
                 // zur Sicherheit prüfen, ob eine Umwandlung möglich ist
-                if let meinAlien = knoten as? Alien {
-                    richtungsWechsel = meinAlien.bewegen(rechtsLinks: self.rechtsLinks, nachUnten: 0)
+                if let meinEndgegner = knoten as? EndGegner {
+                    richtungsWechsel = meinEndgegner.bewegen(rechtsLinks: self.rechtsLinks, nachUnten: 0)
                     
                     // muss die Richtung gewechselt werden?
                     if richtungsWechsel == true {
@@ -167,20 +148,20 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
                         // die Schleife beenden
                         stop.pointee = true
                     }
-                    meinAlien.feuern()
+                    meinEndgegner.feuern()
                 }
             }
             
             if self.nachUnten == 1 {
                 // alle bewegen sich eine Position nach unten
                 // durchlaufen alle Knoten, die den Namen "alien" haben
-                enumerateChildNodes(withName: "alien") {
+                enumerateChildNodes(withName: "endgegner") {
                     // die Verarbeitung abbrechen können
                     knoten, stop in
                     
                     // zur Sicherheit prüfen, ob eine Umwandlung möglich ist
-                    if let meinAlien = knoten as? Alien {
-                        richtungsWechsel = meinAlien.bewegen(rechtsLinks: 0, nachUnten: 1)
+                    if let meinEndgegner = knoten as? EndGegner {
+                        richtungsWechsel = meinEndgegner.bewegen(rechtsLinks: 0, nachUnten: 1)
                     }
                 }
                 // es geht nicht mehr nach unten
@@ -192,13 +173,13 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
             // die Zeit wird zurückgesetzt
             self.zwischenZeit = 0
         }
-        
         // die neue Zeit zwischenspeichern
         letzterAufruf = currentTime
+        
     }
     
     
-    func didBegin(_ contact: SKPhysicsContact) {
+    override func didBegin(_ contact: SKPhysicsContact) {
         // ist ein Alien mit einem Geschoss des Raumschiffs kollidiert?
         if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == 0b1010 {
             // dann zerstören wir die beiden Objekte
@@ -206,7 +187,7 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
             contact.bodyB.node?.removeFromParent()
             
             // wir erhöhen die Punkte und geben sie aus
-            punkte = punkte + 10
+            punkte = punkte + 40
             labelPunkte.text = String(punkte)
             
             // einen Sound für das zerstören des Alienraumschiffes
@@ -250,31 +231,28 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
         }
         // prüfen, ob das Spiel beendet werden muss
         istSpielZuEnde()
-        nextLevel()
-
     }
     
+    
     // Nächstes Level Endgegner
-    func nextLevel() {
+    override func nextLevel() {
         // wenn kein Aliens mehr im Spiel sind
+        
+            // für das Positionieren des Endgegners
+            var zeile = 1
+            var spalte = 1
             
-        
-        // für das Positionieren des Endgegners
-        var zeile = 1
-        var spalte = 1
-        
-        
             // Aufgabe 2
             // den Endgegner erzeugen
-            if childNode(withName: "alien") == nil {
+            if childNode(withName: "endgegner") == nil {
                 
                 for _ in 0 ..< 7 {
                     // die neuen Endgegner erzeugen
                     // übergeben wird die Nummer für die Grafik
-                    var meinAlien = EndGegner()
+                    var meinEndGegner = EndGegner()
                     
                     // die Endgegner in die Szene setzen
-                    meinAlien.setzePosition(szene: self, startPos: CGPoint(x: CGFloat(150 + (spalte * 50)), y: CGFloat(500 + (zeile * 50))))
+                    meinEndGegner.setzePosition(szene: self, startPos: CGPoint(x: CGFloat(150 + (spalte * 50)), y: CGFloat(500 + (zeile * 50))))
                     
                     // die Spalte eventuell erhöhen
                     spalte = spalte + 2
@@ -282,21 +260,18 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
                     // mit der nächsten Zeile weiter
                     if spalte == 8 {
                         zeile = zeile + 1
-                        spalte = 2
+                        spalte = 1
                     }
-                    
                 }
-                
-               
                 // Aufgabe 2 Ende
         }
     }
     
     
     // Hier überprüfen wir, ob das Spiel beendet werden muss
-    func istSpielZuEnde() {
+    override func istSpielZuEnde() {
         // ist die Energie gleich 0 oder kein Alien mehr im Spiel?
-        if energie == 0 {
+        if energie == 0 || childNode(withName: "endgegner") == nil {
             // dann rufen wir die Endszene auf und übergeben die Punkte
             self.view?.presentScene(GameLevelEnd(size: self.size, punkte: self.punkte), transition: SKTransition.flipHorizontal(withDuration: 1.0))
         }
@@ -306,7 +281,7 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
     
     // zur Festsetzung der Levelrate anhand eine Prozentberechnung
     // wieviel weg schon in Prozent zurückgelegt wurde
-    func setLevel (position: CGFloat) -> Int {
+    override func setLevel (position: CGFloat) -> Int {
         // zur Einteilung verschiedene Levelbereichen
         var lvlNr = 1
         
