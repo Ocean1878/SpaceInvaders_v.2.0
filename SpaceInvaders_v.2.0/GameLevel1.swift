@@ -28,8 +28,8 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
     // für die Zeitsteuerung
     var letzterAufruf: TimeInterval = 0
     var zwischenZeit: TimeInterval = 0
-    
   
+    
     
     override func didMove(to view: SKView) {
         // das Label für die Punkte positionieren
@@ -109,47 +109,28 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
     
     
     override func update(_ currentTime: TimeInterval) {
-        // die Zeit seit dem letzten Aufruf berechnen
-        // letzter Aufruf ist eine Eigenschaft vom Typ TimeInterval
-        let delta: TimeInterval = currentTime - letzterAufruf
-        
-        // für den Richtungswechsel
-        var richtungsWechsel = false
-        
-        // zwischenZeit ist eine Eigenschaft vom Typ TimeInterval
-        // die Zeiten zusammenrechnen
-        zwischenZeit = zwischenZeit + delta
         
         
-       // MARK: - Aufgabe 1 - Anfang -
-        
-        // Bewegungslevel des Gegners - am Anfang
-        var level = 1
-        var anfangsPos: CGFloat = 0.0
-        
-        // durchlaufen alle Knoten, die den Namen "alien" haben
-        enumerateChildNodes(withName: "alien") {
-            // die Verarbeitung abbrechen können
-            knoten, stop in
+        // MARK: - TEST - Anfang -
+        if childNode(withName: "alien") != nil {
+            // die Zeit seit dem letzten Aufruf berechnen
+            // letzter Aufruf ist eine Eigenschaft vom Typ TimeInterval
+            let delta: TimeInterval = currentTime - letzterAufruf
             
-            // zur Sicherheit prüfen, ob eine Umwandlung möglich ist
-            if let meinAlien = knoten as? Alien {
-                
-                // die Postition der untersten Reihe ermitteln
-                if anfangsPos < meinAlien.getPosition() {
-                    anfangsPos = meinAlien.getPosition()
-                }
-            }
-        }
-        
-        // Level in Abhängigkeit der aktuellen Position setzen
-        level = self.setLevel(position: anfangsPos)
-        
-        // MARK: - Aufgabe 1 - Ende -
-        
-        
-        // haben wir eine Sekunde erreicht?
-        if zwischenZeit >= (0.4 / Double(level)) { // Geringe Zeit für erhöhten Schwirigkeitsgrad wichtig
+            // für den Richtungswechsel
+            var richtungsWechsel = false
+            
+            // zwischenZeit ist eine Eigenschaft vom Typ TimeInterval
+            // die Zeiten zusammenrechnen
+            zwischenZeit = zwischenZeit + delta
+            
+            
+            // MARK: - Aufgabe 1 - Anfang -
+            
+            // Bewegungslevel des Gegners - am Anfang
+            var level = 1
+            var anfangsPos: CGFloat = 0.0
+            
             // durchlaufen alle Knoten, die den Namen "alien" haben
             enumerateChildNodes(withName: "alien") {
                 // die Verarbeitung abbrechen können
@@ -157,22 +138,21 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
                 
                 // zur Sicherheit prüfen, ob eine Umwandlung möglich ist
                 if let meinAlien = knoten as? Alien {
-                    richtungsWechsel = meinAlien.bewegen(rechtsLinks: self.rechtsLinks, nachUnten: 0)
                     
-                    // muss die Richtung gewechselt werden?
-                    if richtungsWechsel == true {
-                        // dann geht es nach unten
-                        self.nachUnten = 1
-                        
-                        // die Schleife beenden
-                        stop.pointee = true
+                    // die Postition der untersten Reihe ermitteln
+                    if anfangsPos < meinAlien.getPosition() {
+                        anfangsPos = meinAlien.getPosition()
                     }
-                    meinAlien.feuern()
                 }
             }
             
-            if self.nachUnten == 1 {
-                // alle bewegen sich eine Position nach unten
+             // MARK: - Aufgabe 1 - Ende -
+            
+            // Level in Abhängigkeit der aktuellen Position setzen
+            level = self.setLevel(position: anfangsPos)
+            
+            // haben wir eine Sekunde erreicht?
+            if zwischenZeit >= (0.4 / Double(level)) {  // die geringe Zeit ist wichtig für den Schwirigkeitsgrad
                 // durchlaufen alle Knoten, die den Namen "alien" haben
                 enumerateChildNodes(withName: "alien") {
                     // die Verarbeitung abbrechen können
@@ -180,21 +160,159 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
                     
                     // zur Sicherheit prüfen, ob eine Umwandlung möglich ist
                     if let meinAlien = knoten as? Alien {
-                        richtungsWechsel = meinAlien.bewegen(rechtsLinks: 0, nachUnten: 1)
+                        richtungsWechsel = meinAlien.bewegen(rechtsLinks: self.rechtsLinks, nachUnten: 0)
+                        
+                        // muss die Richtung gewechselt werden?
+                        if richtungsWechsel == true {
+                            // dann geht es nach unten
+                            self.nachUnten = 1
+                            
+                            // die Schleife beenden
+                            stop.pointee = true
+                        }
+                        meinAlien.feuern()
                     }
                 }
-                // es geht nicht mehr nach unten
-                self.nachUnten = 0
                 
-                // die Richtung wird umgedreht
-                self.rechtsLinks = self.rechtsLinks * -1
+                if self.nachUnten == 1 {
+                    // alle bewegen sich eine Position nach unten
+                    // durchlaufen alle Knoten, die den Namen "alien" haben
+                    enumerateChildNodes(withName: "alien") {
+                        // die Verarbeitung abbrechen können
+                        knoten, stop in
+                        
+                        // zur Sicherheit prüfen, ob eine Umwandlung möglich ist
+                        if let meinAlien = knoten as? Alien {
+                            richtungsWechsel = meinAlien.bewegen(rechtsLinks: 0, nachUnten: 1)
+                        }
+                    }
+                    // es geht nicht mehr nach unten
+                    self.nachUnten = 0
+                    
+                    // die Richtung wird umgedreht
+                    self.rechtsLinks = self.rechtsLinks * -1
+                }
+                // die Zeit wird zurückgesetzt
+                self.zwischenZeit = 0
             }
-            // die Zeit wird zurückgesetzt
-            self.zwischenZeit = 0
+            
+            // die neue Zeit zwischenspeichern
+            letzterAufruf = currentTime
+            
+        } else if childNode(withName: "alien") == nil {
+            // die Zeit seit dem letzten Aufruf berechnen
+            // letzter Aufruf ist eine Eigenschaft vom Typ TimeInterval
+            let delta: TimeInterval = currentTime - letzterAufruf
+            
+            // für den Richtungswechsel
+            var richtungsWechsel = false
+            
+            // zwischenZeit ist eine Eigenschaft vom Typ TimeInterval
+            // die Zeiten zusammenrechnen
+            zwischenZeit = zwischenZeit + delta
+           
+            
+            // MARK: - Aufgabe 1 - Anfang -
+            
+            // Bewegungslevel des Gegners - am Anfang
+            var level = 1
+            var anfangsPos: CGFloat = 0.0
+                    
+            // durchlaufen alle Knoten, die den Namen "alien" haben
+            enumerateChildNodes(withName: "endgegner") {
+                // die Verarbeitung abbrechen können
+                knoten, stop in
+                        
+                // zur Sicherheit prüfen, ob eine Umwandlung möglich ist
+                if let meinEndgegner = knoten as? EndGegner {
+                
+                    // die Postition der untersten Reihe ermitteln
+                    if anfangsPos < meinEndgegner.getPosition() {
+                        anfangsPos = meinEndgegner.getPosition()
+                        
+                    }
+                }
+            }
+                 
+            // MARK: - Aufgabe 1 - Ende -
+                    
+            // Level in Abhängigkeit der aktuellen Position setzen
+            level = self.setLevel(position: anfangsPos)
+            
+            enumerateChildNodes(withName: "endgegner") {
+                
+                // die Verarbeitung abbrechen können
+                knoten, stop in
+            
+                // zur Sicherheit prüfen, ob eine Umwandlung möglich ist
+                if let meinEndgegner = knoten as? EndGegner {
+                    
+                    // die Postition der untersten Reihe ermitteln
+                    if anfangsPos < meinEndgegner.getPosition() {
+                        anfangsPos = meinEndgegner.getPosition()
+                        
+                    }
+                }
+            }
+            
+            // Level in Abhängigkeit der aktuellen Position setzen
+            level = self.setLevel(position: anfangsPos)
+           
+            // haben wir eine Sekunde erreicht?
+            if zwischenZeit >= (0.4 / Double(level)) {  // die geringe Zeit ist wichtig für den Schwirigkeitsgrad
+            
+                // durchlaufen alle Knoten, die den Namen "alien" haben
+                enumerateChildNodes(withName: "endgegner") {
+                
+                    // die Verarbeitung abbrechen können
+                    knoten, stop in
+            
+                    // zur Sicherheit prüfen, ob eine Umwandlung möglich ist
+                    if let meinEndgegner = knoten as? EndGegner {
+                    richtungsWechsel = meinEndgegner.bewegen(rechtsLinks: self.rechtsLinks, nachUnten: 0)
+            
+                        // muss die Richtung gewechselt werden?
+                        if richtungsWechsel == true {
+                        
+                            // dann geht es nach unten
+                            self.nachUnten = 1
+            
+                            // die Schleife beenden
+                            stop.pointee = true
+                        }
+                        meinEndgegner.feuern()
+                    }
+                }
+            
+                if self.nachUnten == 1 {
+                
+                    // alle bewegen sich eine Position nach unten
+                    // durchlaufen alle Knoten, die den Namen "alien" haben
+                    enumerateChildNodes(withName: "endgegner") {
+                    
+                        // die Verarbeitung abbrechen können
+                        knoten, stop in
+                        
+                        // zur Sicherheit prüfen, ob eine Umwandlung möglich ist
+                        if let meinEndgegner = knoten as? EndGegner {
+                            richtungsWechsel = meinEndgegner.bewegen(rechtsLinks: 0, nachUnten: 1)
+                        }
+                    }
+                    
+                    // es geht nicht mehr nach unten
+                    self.nachUnten = 0
+            
+                    // die Richtung wird umgedreht
+                    self.rechtsLinks = self.rechtsLinks * -1
+                }
+                
+                // die Zeit wird zurückgesetzt
+                self.zwischenZeit = 0
+            }
+    
+            // die neue Zeit zwischenspeichern
+            letzterAufruf = currentTime
         }
-        
-        // die neue Zeit zwischenspeichern
-        letzterAufruf = currentTime
     }
     
     
@@ -249,15 +367,15 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
             print("Raumschiff ist mit ein Alien Kollidiert")
         }
         // prüfen, ob das Spiel beendet werden muss
-        istSpielZuEnde()
         nextLevel()
-
+        istSpielZuEnde()
     }
+
     
     // Nächstes Level Endgegner
     func nextLevel() {
         // wenn kein Aliens mehr im Spiel sind
-            
+        
         
         // für das Positionieren des Endgegners
         var zeile = 1
@@ -267,31 +385,33 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
             // Aufgabe 2
             // den Endgegner erzeugen
             if childNode(withName: "alien") == nil {
+     
                 
                 for _ in 0 ..< 7 {
                     // die neuen Endgegner erzeugen
                     // übergeben wird die Nummer für die Grafik
-                    var meinAlien = EndGegner()
+                    var meinEndgegner = EndGegner()
                     
                     // die Endgegner in die Szene setzen
-                    meinAlien.setzePosition(szene: self, startPos: CGPoint(x: CGFloat(150 + (spalte * 50)), y: CGFloat(500 + (zeile * 50))))
+                    meinEndgegner.setzePosition(szene: self, startPos: CGPoint(x: CGFloat(150 + (spalte * 50)), y: CGFloat(500 + (zeile * 50))))
                     
                     // die Spalte eventuell erhöhen
                     spalte = spalte + 2
                     // wenn alle Spalten gefüllt sind, geht es eventuell
                     // mit der nächsten Zeile weiter
                     if spalte == 8 {
-                        zeile = zeile + 1
+                        zeile = zeile + 0
                         spalte = 2
                     }
                     
                 }
-                
+            
                
                 // Aufgabe 2 Ende
         }
     }
     
+
     
     // Hier überprüfen wir, ob das Spiel beendet werden muss
     func istSpielZuEnde() {

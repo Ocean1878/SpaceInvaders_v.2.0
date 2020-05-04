@@ -8,26 +8,26 @@
 
 import SpriteKit
 
-class GameLevel2: GameLevel1 {
+class GameLevel2: SKScene, SKPhysicsContactDelegate {
     
-//    // für die Punkte
-//    var punkte = 0
-//    let labelPunkte = SKLabelNode()
-//    
-//    // für die Energie
-//    var energie = 100
-//    let labelEnergie = SKLabelNode()
-//    
-//    // das Raumschiff
-//    var meinRaumschiff = Raumschiff()
-//    
-//    // für die Bewegung der Aliens
-//    var rechtsLinks = -1
-//    var nachUnten = 0
-//    
-//    // für die Zeitsteuerung
-//    var letzterAufruf: TimeInterval = 0
-//    var zwischenZeit: TimeInterval = 0
+    // für die Punkte
+    var punkte = 0
+    let labelPunkte = SKLabelNode()
+
+    // für die Energie
+    var energie = 100
+    let labelEnergie = SKLabelNode()
+
+    // das Raumschiff
+    var meinRaumschiff = Raumschiff()
+
+    // für die Bewegung der Aliens
+    var rechtsLinks = -1
+    var nachUnten = 0
+
+    // für die Zeitsteuerung
+    var letzterAufruf: TimeInterval = 0
+    var zwischenZeit: TimeInterval = 0
     
     
     
@@ -179,7 +179,7 @@ class GameLevel2: GameLevel1 {
     }
     
     
-    override func didBegin(_ contact: SKPhysicsContact) {
+    func didBegin(_ contact: SKPhysicsContact) {
         // ist ein Alien mit einem Geschoss des Raumschiffs kollidiert?
         if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == 0b1010 {
             // dann zerstören wir die beiden Objekte
@@ -235,7 +235,7 @@ class GameLevel2: GameLevel1 {
     
     
     // Nächstes Level Endgegner
-    override func nextLevel() {
+    func nextLevel() {
         // wenn kein Aliens mehr im Spiel sind
         
             // für das Positionieren des Endgegners
@@ -269,7 +269,7 @@ class GameLevel2: GameLevel1 {
     
     
     // Hier überprüfen wir, ob das Spiel beendet werden muss
-    override func istSpielZuEnde() {
+    func istSpielZuEnde() {
         // ist die Energie gleich 0 oder kein Alien mehr im Spiel?
         if energie == 0 || childNode(withName: "endgegner") == nil {
             // dann rufen wir die Endszene auf und übergeben die Punkte
@@ -281,7 +281,7 @@ class GameLevel2: GameLevel1 {
     
     // zur Festsetzung der Levelrate anhand eine Prozentberechnung
     // wieviel weg schon in Prozent zurückgelegt wurde
-    override func setLevel (position: CGFloat) -> Int {
+    func setLevel (position: CGFloat) -> Int {
         // zur Einteilung verschiedene Levelbereichen
         var lvlNr = 1
         
