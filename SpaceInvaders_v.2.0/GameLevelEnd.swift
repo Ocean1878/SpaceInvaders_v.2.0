@@ -18,6 +18,7 @@ class GameLevelEnd: SKScene {
     let labelMeldung = SKLabelNode()
     
     
+    // zur Beschaffung der Punktestand am Ende des Spiels
     init(size: CGSize, punkte: Int) {
         // den Konstruktor der übergeordneten Klasse aufrufen
         // und die Größe durchreichen
@@ -33,6 +34,7 @@ class GameLevelEnd: SKScene {
     }
     
     override func didMove(to view: SKView) {
+        
         // der Hintergrund ist schwarz
         backgroundColor = SKColor.black
         

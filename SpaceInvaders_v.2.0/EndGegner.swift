@@ -18,19 +18,11 @@ class EndGegner: SKSpriteNode {
     // für die Feuerintensität
     let feuerGeschwindigkeit = 100
     
-//    // für die Punkte
-//    var punkte = 0
-//    // ein Label für die Endpunkte
-//    let labePunkte = SKLabelNode()
-//
-//    // für die Energie
-//    var energie = 0
-//    let labelEnergie = SKLabelNode()
-    
     
     // der Initialisierer erzeugt den Endgegner mit dem Bild,
     // dessen Nummer übergeben wird
     init() {
+        
         // das Bild erzeugen
         let bild = SKTexture(imageNamed: "invader_endgegner")
         

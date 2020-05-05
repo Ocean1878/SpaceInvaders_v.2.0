@@ -23,6 +23,7 @@ class Alien: SKSpriteNode {
     // der Initialisierer erzeugt das Alien mit dem Bild,
     // dessen Nummer übergeben wird
     init(textureNummer: Int) {
+        
         // das Bild erzeugen
         let bildName = "invader_0" + String(textureNummer)
         let bild = SKTexture(imageNamed: bildName)
@@ -97,6 +98,7 @@ class Alien: SKSpriteNode {
     
     // die Methode zum Feuern für die Aliens
     func feuern() {
+        
         // eine zufällige Zahl erzeugen, die obere Grenze wird durch
         // die Eigenschaft bestimmt
         if arc4random_uniform(UInt32(feuerGeschwindigkeit)) == 0 {

@@ -12,8 +12,10 @@ class Raumschiff: SKSpriteNode {
     // für die Szene
     var szene: SKScene!
     
+    
     // der Initialisierer erzeugt das Raumschiff
     init() {
+        
         // das Bild erzeugen
         let bild = SKTexture(imageNamed: "Spaceship")
         // den Konstruktor der übergeordneten Klasse aufrufen
