@@ -8,6 +8,8 @@
 
 import SpriteKit
 
+// MARK: - Aufgabe 2 -
+
 class GameLevel2: SKScene, SKPhysicsContactDelegate {
     
     // für die Punkte
@@ -50,6 +52,7 @@ class GameLevel2: SKScene, SKPhysicsContactDelegate {
     
     
     override func didMove(to view: SKView) {
+        
         // das Label für die Punkte positionieren
         labelPunkte.fontSize = 24
         labelPunkte.fontColor = SKColor.white
@@ -83,10 +86,9 @@ class GameLevel2: SKScene, SKPhysicsContactDelegate {
             // übergeben wird die Nummer für die Grafik
             var meinEndgegner = EndGegner()
             
-            // das Alien in die Szene setzen
+            // den Endgegner in die Szene setzen
            meinEndgegner.setzePosition(szene: self, startPos: CGPoint(x: CGFloat(150 + (spalte * 50)), y: CGFloat(500 + (zeile * 50))))
            
-            
             // die Spalte erhöhen
             spalte = spalte + 2
             // wenn alle Spalten gefüllt sind, geht es mit der nächsten
@@ -99,6 +101,7 @@ class GameLevel2: SKScene, SKPhysicsContactDelegate {
         
         // die Physikengine aktivieren, aber ohne Schwerkraft
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
+        
         // die Szene reagiert selbst auf eine Kollision und
         // wird bei einer Kollision aufgerufen
         physicsWorld.contactDelegate = self
@@ -107,6 +110,7 @@ class GameLevel2: SKScene, SKPhysicsContactDelegate {
     
     
     override func keyDown(with event: NSEvent) {
+       
         // die Steuerung erfolgt sowohl mit der Pfeiltasten,
         // als auch mit Taste "A" und "D"
         // das Feuern sowohl mit der Leertaste,
@@ -131,6 +135,7 @@ class GameLevel2: SKScene, SKPhysicsContactDelegate {
     
     
     override func update(_ currentTime: TimeInterval) {
+        
         // die Zeit seit dem letzten Aufruf berechnen
         // letzter Aufruf ist eine Eigenschaft vom Typ TimeInterval
         let delta: TimeInterval = currentTime - letzterAufruf
@@ -143,14 +148,14 @@ class GameLevel2: SKScene, SKPhysicsContactDelegate {
         zwischenZeit = zwischenZeit + delta
         
         
-        // MARK: - Aufgabe 1 - Anfang -
+        // MARK: - Aufgabe 1 - wurde von Aufgabe 1 übernommen -
         
         // eine Variable zur Berechnung des Levelgegners
         var level = 1
         // eine Variable zur Angangsposition
         var anfangsWert: CGFloat = 0.0
         
-        // durchlaufen alle Knoten, die den Namen "alien" haben
+        // durchlaufen alle Knoten, die den Namen "endgegner" haben
         enumerateChildNodes(withName: "endgegner") {
             knoten, stop in
             
@@ -195,6 +200,7 @@ class GameLevel2: SKScene, SKPhysicsContactDelegate {
             }
             
             if self.nachUnten == 1 {
+                
                 // alle bewegen sich eine Position nach unten
                 // durchlaufen alle Knoten, die den Namen "alien" haben
                 enumerateChildNodes(withName: "endgegner") {
@@ -206,18 +212,20 @@ class GameLevel2: SKScene, SKPhysicsContactDelegate {
                         richtungsWechsel = meinEndgegner.bewegen(rechtsLinks: 0, nachUnten: 1)
                     }
                 }
+                
                 // es geht nicht mehr nach unten
                 self.nachUnten = 0
                 
                 // die Richtung wird umgedreht
                 self.rechtsLinks = self.rechtsLinks * -1
             }
+            
             // die Zeit wird zurückgesetzt
             self.zwischenZeit = 0
         }
+        
         // die neue Zeit zwischenspeichern
         letzterAufruf = currentTime
-        
     }
     
     
@@ -285,6 +293,7 @@ class GameLevel2: SKScene, SKPhysicsContactDelegate {
     
     // Hier überprüfen wir, ob das Spiel beendet werden muss
     func istSpielZuEnde() {
+        
         // ist die Energie gleich 0 oder kein Alien mehr im Spiel?
         if energie == 0 || childNode(withName: "endgegner") == nil {
             // dann rufen wir die Endszene auf und übergeben die Punkte
@@ -292,7 +301,8 @@ class GameLevel2: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    // MARK: - Aufgabe 1 - Anfang -
+    
+    // MARK: - Aufgabe 1 - wurde übernommen -
     
     // zur Festsetzung der Levelrate anhand eine Prozentberechnung
     // wieviel weg schon in Prozent zurückgelegt wurde

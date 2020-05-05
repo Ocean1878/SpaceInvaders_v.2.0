@@ -75,7 +75,6 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
             }
         }
         
-        
         // die Physikengine aktivieren, aber ohne Schwerkraft
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         // die Szene reagiert selbst auf eine Kollision und
@@ -110,8 +109,6 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         
-        
-        // MARK: - TEST - Anfang -
         // die Zeit seit dem letzten Aufruf berechnen
         // letzter Aufruf ist eine Eigenschaft vom Typ TimeInterval
         let delta: TimeInterval = currentTime - letzterAufruf
@@ -147,6 +144,7 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
         }
         
          // MARK: - Aufgabe 1 - Ende -
+        
         
         // Level in Abhängigkeit der aktuellen Position setzen
         level = self.setLevel(position: anfangsPos)
@@ -189,12 +187,14 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
                         richtungsWechsel = meinAlien.bewegen(rechtsLinks: 0, nachUnten: 1)
                     }
                 }
+                
                 // es geht nicht mehr nach unten
                 self.nachUnten = 0
                 
                 // die Richtung wird umgedreht
                 self.rechtsLinks = self.rechtsLinks * -1
             }
+            
             // die Zeit wird zurückgesetzt
             self.zwischenZeit = 0
         }
@@ -279,12 +279,14 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
     
     // Hier überprüfen wir, ob das Spiel beendet werden muss
     func istSpielZuEnde() {
+        
         // ist die Energie gleich 0 oder kein Alien mehr im Spiel?
         if energie == 0 {
             // dann rufen wir die Endszene auf und übergeben die Punkte
             self.view?.presentScene(GameLevelEnd(size: self.size, punkte: self.punkte), transition: SKTransition.flipHorizontal(withDuration: 1.0))
         }
     }
+    
     
     // MARK: - Aufgabe 1 - Anfang -
     
