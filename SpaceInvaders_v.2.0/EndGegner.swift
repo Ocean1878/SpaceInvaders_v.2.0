@@ -52,7 +52,7 @@ class EndGegner: SKSpriteNode {
         // reagiert auf Kontakt mit einem Raumschiffgeschoss
         // und Raumschiff
         // das Geschoss gehört zur Kategorie 8 = 0b1000
-        self.physicsBody?.contactTestBitMask = 0b1000
+        self.physicsBody?.contactTestBitMask = 0b1 | 0b1000
         
         // es soll aber nicht auf Kollisionen reagieren
         self.physicsBody?.collisionBitMask = 0
@@ -118,6 +118,7 @@ class EndGegner: SKSpriteNode {
             // das Aliengeschoss bekommt die Kategorie 32 = 0b100000
             // sie muss als Bitmaske als binärer Wert angegeben werden
             munitionSprite.physicsBody?.categoryBitMask = 0b100000
+            
             // es ragiert nicht auf Kollisionen
             munitionSprite.physicsBody?.collisionBitMask = 0
             

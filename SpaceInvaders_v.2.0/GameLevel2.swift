@@ -30,6 +30,8 @@ class GameLevel2: SKScene, SKPhysicsContactDelegate {
     var zwischenZeit: TimeInterval = 0
     
     
+    // zur Beschaffung der Punkte- und Energiestand
+    // aus GameLevel1
     init(size: CGSize, punkte: Int, energie: Int) {
         // den Konstruktor der übergeordneten Klasse aufrufen
         // und die Größe durchreichen
@@ -44,6 +46,7 @@ class GameLevel2: SKScene, SKPhysicsContactDelegate {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    
     
     
     override func didMove(to view: SKView) {
