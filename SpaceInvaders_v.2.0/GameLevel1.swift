@@ -56,7 +56,7 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
         var spalte = 1
         
         // die Aliens erzeugen
-        for _ in 0 ..< 2 {
+        for _ in 0 ..< 42 {
             // ein neues Alien erzeugen
             // übergeben wird die Nummer für die Grafik
             var meinAlien = Alien(textureNummer: zeile)
