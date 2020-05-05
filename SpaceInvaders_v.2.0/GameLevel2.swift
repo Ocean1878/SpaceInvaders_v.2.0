@@ -235,37 +235,37 @@ class GameLevel2: SKScene, SKPhysicsContactDelegate {
     
     
     // Nächstes Level Endgegner
-    func nextLevel() {
-        // wenn kein Aliens mehr im Spiel sind
-        
-            // für das Positionieren des Endgegners
-            var zeile = 1
-            var spalte = 1
-            
-            // Aufgabe 2
-            // den Endgegner erzeugen
-            if childNode(withName: "endgegner") == nil {
-                
-                for _ in 0 ..< 7 {
-                    // die neuen Endgegner erzeugen
-                    // übergeben wird die Nummer für die Grafik
-                    var meinEndGegner = EndGegner()
-                    
-                    // die Endgegner in die Szene setzen
-                    meinEndGegner.setzePosition(szene: self, startPos: CGPoint(x: CGFloat(150 + (spalte * 50)), y: CGFloat(500 + (zeile * 50))))
-                    
-                    // die Spalte eventuell erhöhen
-                    spalte = spalte + 2
-                    // wenn alle Spalten gefüllt sind, geht es eventuell
-                    // mit der nächsten Zeile weiter
-                    if spalte == 8 {
-                        zeile = zeile + 1
-                        spalte = 1
-                    }
-                }
-                // Aufgabe 2 Ende
-        }
-    }
+//    func nextLevel() {
+//        // wenn kein Aliens mehr im Spiel sind
+//        
+//            // für das Positionieren des Endgegners
+//            var zeile = 1
+//            var spalte = 1
+//            
+//            // Aufgabe 2
+//            // den Endgegner erzeugen
+//            if childNode(withName: "endgegner") == nil {
+//                
+//                for _ in 0 ..< 7 {
+//                    // die neuen Endgegner erzeugen
+//                    // übergeben wird die Nummer für die Grafik
+//                    var meinEndGegner = EndGegner(textureNummer: zeile)
+//                    
+//                    // die Endgegner in die Szene setzen
+//                    meinEndGegner.setzePosition(szene: self, startPos: CGPoint(x: CGFloat(150 + (spalte * 50)), y: CGFloat(500 + (zeile * 50))))
+//                    
+//                    // die Spalte eventuell erhöhen
+//                    spalte = spalte + 2
+//                    // wenn alle Spalten gefüllt sind, geht es eventuell
+//                    // mit der nächsten Zeile weiter
+//                    if spalte == 8 {
+//                        zeile = zeile + 1
+//                        spalte = 1
+//                    }
+//                }
+//                // Aufgabe 2 Ende
+//        }
+//    }
     
     
     // Hier überprüfen wir, ob das Spiel beendet werden muss

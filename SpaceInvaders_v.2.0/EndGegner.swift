@@ -30,7 +30,7 @@ class EndGegner: SKSpriteNode {
     
     // der Initialisierer erzeugt das Alien mit dem Bild,
     // dessen Nummer übergeben wird
-    init() {
+    init(textureNummer: Int) {
         // das Bild erzeugen
         let bild = SKTexture(imageNamed: "invader_endgegner")
         

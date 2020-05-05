@@ -32,6 +32,7 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
     var zeile = 1
     var spalte = 1
     
+    
     override func didMove(to view: SKView) {
         // das Label für die Punkte positionieren
         labelPunkte.fontSize = 24
@@ -115,6 +116,7 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
         
         // MARK: - TEST - Anfang -
         if childNode(withName: "alien") != nil {
+            
             // die Zeit seit dem letzten Aufruf berechnen
             // letzter Aufruf ist eine Eigenschaft vom Typ TimeInterval
             let delta: TimeInterval = currentTime - letzterAufruf
@@ -135,6 +137,7 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
             
             // durchlaufen alle Knoten, die den Namen "alien" haben
             enumerateChildNodes(withName: "alien") {
+                
                 // die Verarbeitung abbrechen können
                 knoten, stop in
                 
@@ -155,8 +158,10 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
             
             // haben wir eine Sekunde erreicht?
             if zwischenZeit >= (0.4 / Double(level)) {  // die geringe Zeit ist wichtig für den Schwirigkeitsgrad
+                
                 // durchlaufen alle Knoten, die den Namen "alien" haben
                 enumerateChildNodes(withName: "alien") {
+                    
                     // die Verarbeitung abbrechen können
                     knoten, stop in
                     
@@ -177,6 +182,7 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
                 }
                 
                 if self.nachUnten == 1 {
+                    
                     // alle bewegen sich eine Position nach unten
                     // durchlaufen alle Knoten, die den Namen "alien" haben
                     enumerateChildNodes(withName: "alien") {
@@ -202,6 +208,7 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
             letzterAufruf = currentTime
             
         } else if childNode(withName: "alien") == nil {
+            
             // die Zeit seit dem letzten Aufruf berechnen
             // letzter Aufruf ist eine Eigenschaft vom Typ TimeInterval
             let delta: TimeInterval = currentTime - letzterAufruf
@@ -319,8 +326,10 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
     
     
     func didBegin(_ contact: SKPhysicsContact) {
+        
         // ist ein Alien mit einem Geschoss des Raumschiffs kollidiert?
         if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == 0b1010 {
+            
             // dann zerstören wir die beiden Objekte
             contact.bodyA.node?.removeFromParent()
             contact.bodyB.node?.removeFromParent()
@@ -338,6 +347,7 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
         
         // ist ein Geschoss eines Aliens mit dem Raumschiff kollidiert?
         if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == 0b101 {
+            
             // dann zerstören wir das Geschoss
             contact.bodyB.node?.removeFromParent()
             
@@ -354,6 +364,7 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
         
         // ist ein Alien mit dem Raumschiff kollidiert?
         if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == 0b11 {
+            
             // dann zerstören wir die beiden Objekte
             contact.bodyA.node?.removeFromParent()
             contact.bodyB.node?.removeFromParent()
@@ -374,6 +385,7 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
         
         // ist ein Endgegner mit einem Geschoss des Raumschiffs kollidiert?
         if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == 0b11000 {
+            
             // dann zerstören wir die beiden Objekte
             contact.bodyA.node?.removeFromParent()
             contact.bodyB.node?.removeFromParent()
@@ -391,6 +403,7 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
         
         // ist ein Geschoss des Endgegners mit dem Raumschiff kollidiert?
         if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == 0b100001 {
+            
             // dann zerstören wir das Geschoss
             contact.bodyB.node?.removeFromParent()
             
@@ -407,6 +420,7 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
         
         // ist ein Endgegner mit dem Raumschiff kollidiert?
         if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == 0b10001 {
+            
             // dann zerstören wir die beiden Objekte
             contact.bodyA.node?.removeFromParent()
             contact.bodyB.node?.removeFromParent()
@@ -423,7 +437,7 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
         }
         
         // prüfen, ob das Spiel beendet werden muss
-        nextLevel()
+        //nextLevel()
         istSpielZuEnde()
     }
 
@@ -446,7 +460,7 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
                 for _ in 0 ..< 8 {
                     // die neuen Endgegner erzeugen
                     // übergeben wird die Nummer für die Grafik
-                    var meinEndgegner = EndGegner()
+                    var meinEndgegner = EndGegner(textureNummer: zeile)
                     
                     // die Endgegner in die Szene setzen
                     meinEndgegner.setzePosition(szene: self, startPos: CGPoint(x: CGFloat(150 + (spalte * 50)), y: CGFloat(500 + (zeile * 50))))
