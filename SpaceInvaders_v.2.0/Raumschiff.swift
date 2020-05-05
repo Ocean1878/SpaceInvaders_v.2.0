@@ -30,7 +30,7 @@ class Raumschiff: SKSpriteNode {
         
         // reagiert auf Kontakt mit einem Aliengeschoss
         // und das Alien
-        self.physicsBody?.contactTestBitMask = 0b10 | 0b100
+        self.physicsBody?.contactTestBitMask = 0b100 | 0b100000
         
         // es soll aber nicht auf Kollisionen reagieren
         self.physicsBody?.collisionBitMask = 0

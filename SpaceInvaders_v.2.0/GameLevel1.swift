@@ -29,7 +29,8 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
     var letzterAufruf: TimeInterval = 0
     var zwischenZeit: TimeInterval = 0
   
-    
+    var zeile = 1
+    var spalte = 1
     
     override func didMove(to view: SKView) {
         // das Label für die Punkte positionieren
@@ -53,8 +54,8 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
         meinRaumschiff.setzePosition(szene: self)
         
         // für das Positionieren der Aliens
-        var zeile = 1
-        var spalte = 1
+//        var zeile = 1
+//        var spalte = 1
         
         // die Aliens erzeugen
         for _ in 0 ..< 1 {
@@ -75,6 +76,7 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
                 spalte = 1
             }
         }
+        
         
         // die Physikengine aktivieren, aber ohne Schwerkraft
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
@@ -366,6 +368,60 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
             // zum Testen geben wir noch eine Meldung aus
             print("Raumschiff ist mit ein Alien Kollidiert")
         }
+        
+        
+        // MARK: - Kollisionsprüfung und Punktevergabe für Endgegner -
+        
+        // ist ein Endgegner mit einem Geschoss des Raumschiffs kollidiert?
+        if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == 0b11000 {
+            // dann zerstören wir die beiden Objekte
+            contact.bodyA.node?.removeFromParent()
+            contact.bodyB.node?.removeFromParent()
+            
+            // wir erhöhen die Punkte und geben sie aus
+            punkte = punkte + 40
+            labelPunkte.text = String(punkte)
+            
+            // einen Sound für das zerstören des Alienraumschiffes
+            run(SKAction.playSoundFileNamed("alien_explosion.mp3", waitForCompletion: false))
+            
+            // zum Testen geben wir noch eine Meldung aus
+            print("Endgegner getroffen")
+        }
+        
+        // ist ein Geschoss des Endgegners mit dem Raumschiff kollidiert?
+        if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == 0b100001 {
+            // dann zerstören wir das Geschoss
+            contact.bodyB.node?.removeFromParent()
+            
+            // wir ziehen Energie des Raumschiffes ab
+            energie = energie - 20
+            labelEnergie.text = String(energie)
+            
+            // einen Sound für das treffen des Raumschiffes durch die Aliens
+            run(SKAction.playSoundFileNamed("alien_explosion.m4a", waitForCompletion: false))
+            
+            // zum Testen geben wir noch eine Meldung aus
+            print("Raumschoff vom Endgegner getroffen")
+        }
+        
+        // ist ein Endgegner mit dem Raumschiff kollidiert?
+        if contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask == 0b10001 {
+            // dann zerstören wir die beiden Objekte
+            contact.bodyA.node?.removeFromParent()
+            contact.bodyB.node?.removeFromParent()
+            
+            // Der Energie des Raumschiffes wird auf 0 gesetzt
+            energie = 0
+            labelEnergie.text = String(energie)
+            
+            // einen Sound für das zerstören des Raumschiffes
+            run(SKAction.playSoundFileNamed("raumschiff_explosion.m4a", waitForCompletion: false))
+            
+            // zum Testen geben wir noch eine Meldung aus
+            print("Raumschiff ist mit dem Endgegner Kollidiert")
+        }
+        
         // prüfen, ob das Spiel beendet werden muss
         nextLevel()
         istSpielZuEnde()
@@ -378,8 +434,8 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
         
         
         // für das Positionieren des Endgegners
-        var zeile = 1
-        var spalte = 1
+//        var zeile = 1
+//        var spalte = 1
         
         
             // Aufgabe 2
@@ -387,7 +443,7 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
             if childNode(withName: "alien") == nil {
      
                 
-                for _ in 0 ..< 7 {
+                for _ in 0 ..< 8 {
                     // die neuen Endgegner erzeugen
                     // übergeben wird die Nummer für die Grafik
                     var meinEndgegner = EndGegner()
@@ -401,12 +457,13 @@ class GameLevel1: SKScene, SKPhysicsContactDelegate {
                     // mit der nächsten Zeile weiter
                     if spalte == 8 {
                         zeile = zeile + 0
-                        spalte = 2
+                        spalte = 1
                     }
                     
                 }
-            
-               
+                
+                physicsWorld.gravity = CGVector(dx: 0, dy: 0)
+                physicsWorld.contactDelegate = self
                 // Aufgabe 2 Ende
         }
     }

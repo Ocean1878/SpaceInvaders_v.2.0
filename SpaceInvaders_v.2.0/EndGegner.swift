@@ -45,14 +45,14 @@ class EndGegner: SKSpriteNode {
         // hier ein Rechteck in der Größe des Sprites
         self.physicsBody = SKPhysicsBody(rectangleOf: self.size)
         
-        // das Alien bekommt die Kategorie 2 = 0b10
+        // der Endgegner bekommt die Kategorie 6 = 0b10000
         // sie muss als Bitmaske als binärer Wert angegeben werden
-        self.physicsBody?.categoryBitMask = 0b10
+        self.physicsBody?.categoryBitMask = 0b10000
         
         // reagiert auf Kontakt mit einem Raumschiffgeschoss
         // und Raumschiff
         // das Geschoss gehört zur Kategorie 8 = 0b1000
-        self.physicsBody?.contactTestBitMask = 0b1 | 0b1000
+        self.physicsBody?.contactTestBitMask = 0b1000
         
         // es soll aber nicht auf Kollisionen reagieren
         self.physicsBody?.collisionBitMask = 0
@@ -115,9 +115,9 @@ class EndGegner: SKSpriteNode {
             // hier ein Rechteck in der Größe des Sprites
             munitionSprite.physicsBody = SKPhysicsBody(rectangleOf: munitionSprite.size)
             
-            // das Aliengeschoss bekommt die Kategorie 4 = 0b100
+            // das Aliengeschoss bekommt die Kategorie 32 = 0b100000
             // sie muss als Bitmaske als binärer Wert angegeben werden
-            munitionSprite.physicsBody?.categoryBitMask = 0b100
+            munitionSprite.physicsBody?.categoryBitMask = 0b100000
             // es ragiert nicht auf Kollisionen
             munitionSprite.physicsBody?.collisionBitMask = 0
             

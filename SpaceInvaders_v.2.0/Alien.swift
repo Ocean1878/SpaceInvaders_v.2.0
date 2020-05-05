@@ -45,7 +45,7 @@ class Alien: SKSpriteNode {
         // reagiert auf Kontakt mit einem Raumschiffgeschoss
         // und Raumschiff
         // das Geschoss gehört zur Kategorie 8 = 0b1000
-        self.physicsBody?.contactTestBitMask = 0b1 | 0b1000
+        self.physicsBody?.contactTestBitMask = 0b1000
         
         // es soll aber nicht auf Kollisionen reagieren
         self.physicsBody?.collisionBitMask = 0
